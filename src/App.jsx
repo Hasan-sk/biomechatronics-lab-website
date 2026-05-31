@@ -1,24 +1,15 @@
 import React, { useMemo, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+
+const scholarUrl = "https://scholar.google.com/citations?user=rWpbA6wAAAAJ&hl=en&authuser=1";
+const emailUrl = "mailto:hasansk@miamioh.edu";
+const facultyUrl = "https://miamioh.edu/profiles/cec/sk-khairul-hasan.html";
 
 function Button({ children, className = "", ...props }) {
-  return (
-    <button
-      className={`inline-flex items-center justify-center rounded-md px-4 py-2 font-bold transition ${className}`}
-      {...props}
-    >
-      {children}
-    </button>
-  );
+  return <button className={`inline-flex items-center justify-center rounded-md px-4 py-2 font-black transition ${className}`} {...props}>{children}</button>;
 }
-
-function Card({ children, className = "" }) {
-  return <div className={className}>{children}</div>;
-}
-
-function CardContent({ children, className = "" }) {
-  return <div className={className}>{children}</div>;
-}
+function Card({ children, className = "" }) { return <div className={className}>{children}</div>; }
+function CardContent({ children, className = "" }) { return <div className={className}>{children}</div>; }
 
 const navItems = [
   { label: "Home", id: "home" },
@@ -33,57 +24,17 @@ const navItems = [
 ];
 
 const researchThrusts = [
-  {
-    icon: "R",
-    title: "Rehabilitation Exoskeleton Robotics",
-    text: "We design and study wearable robotic systems that physically interact with the human body to support recovery, strength training, and functional movement. Our work emphasizes anatomically aligned mechanisms, safe human-robot interaction, and rehabilitation modes that include passive assistance, active assistance, resistive training, and adaptive therapy.",
-  },
-  {
-    icon: "AI",
-    title: "AI-Enabled Adaptive Control",
-    text: "We develop intelligent control algorithms that allow robotic systems to respond to changing user ability, uncertainty, and task requirements. Research includes nonlinear control, computed-torque control, adaptive and robust control, reinforcement learning, and deep learning based control architectures for precise, stable, and personalized motion assistance.",
-  },
-  {
-    icon: "HRI",
-    title: "Human-Robot Interaction",
-    text: "We investigate how robots can understand user intent, effort, comfort, and performance through sensor-driven interaction. This thrust integrates motion data, force/torque sensing, physiological signals, embedded systems, and user-centered interfaces to improve safety, engagement, and trust in assistive robotic technologies.",
-  },
-  {
-    icon: "DT",
-    title: "Digital Twins and Cyber-Physical Systems",
-    text: "We create simulation-connected robotic systems that combine physical hardware, real-time data, and computational models. These digital twin frameworks support controller testing, predictive maintenance, remote monitoring, system diagnostics, and safer development of intelligent rehabilitation and automation platforms.",
-  },
+  ["R", "Rehabilitation Exoskeleton Robotics", "We design and study wearable robotic systems that physically interact with the human body to support recovery, strength training, and functional movement. Our work emphasizes anatomically aligned mechanisms, safe human-robot interaction, and rehabilitation modes that include passive assistance, active assistance, resistive training, and adaptive therapy."],
+  ["AI", "AI-Enabled Adaptive Control", "We develop intelligent control algorithms that allow robotic systems to respond to changing user ability, uncertainty, and task requirements. Research includes nonlinear control, computed-torque control, adaptive and robust control, reinforcement learning, and deep learning based control architectures for precise, stable, and personalized motion assistance."],
+  ["HRI", "Human-Robot Interaction", "We investigate how robots can understand user intent, effort, comfort, and performance through sensor-driven interaction. This thrust integrates motion data, force/torque sensing, physiological signals, embedded systems, and user-centered interfaces to improve safety, engagement, and trust in assistive robotic technologies."],
+  ["DT", "Digital Twins and Cyber-Physical Systems", "We create simulation-connected robotic systems that combine physical hardware, real-time data, and computational models. These digital twin frameworks support controller testing, predictive maintenance, remote monitoring, system diagnostics, and safer development of intelligent rehabilitation and automation platforms."],
 ];
 
 const projects = [
-  {
-    title: "ARMEX: 9-DOF Upper-Extremity Exoskeleton",
-    tag: "Flagship Project",
-    description:
-      "ARMEX is the lab’s flagship upper-extremity rehabilitation platform. The system is being developed to support natural shoulder, elbow, forearm, and wrist movement while enabling personalized, robot-assisted therapy for users with impaired arm function. The project integrates mechanical design, dynamic modeling, nonlinear control, sensor feedback, and future AI-based adaptation.",
-    points: ["Anatomically inspired 9-DOF arm assistance", "Trajectory tracking with nonlinear control", "Future EMG, AI, and FES integration"],
-  },
-  {
-    title: "Lower-Extremity Rehabilitation Exoskeleton",
-    tag: "Biomechanics + Control",
-    description:
-      "This research focuses on modeling and control of lower-limb exoskeleton systems for gait rehabilitation and assistive mobility. Students derive kinematic and dynamic models, analyze actuator torque requirements, and benchmark control strategies under realistic uncertainty, friction, and payload conditions.",
-    points: ["Kinematic and Lagrangian dynamic modeling", "Controller benchmarking under uncertainty", "Simulation-driven rehabilitation studies"],
-  },
-  {
-    title: "Digital Twin for Rehabilitation Robots",
-    tag: "Simulation Intelligence",
-    description:
-      "The digital twin project connects physical robotic systems with real-time simulation models to support safer testing, controller tuning, predictive diagnostics, and remote performance monitoring. The goal is to create a data-informed virtual environment for rehabilitation planning and system-level decision support.",
-    points: ["Real-time model and sensor synchronization", "Fault detection and predictive maintenance", "Remote visualization and therapy planning"],
-  },
-  {
-    title: "IoT-Enabled Robotic Rehabilitation",
-    tag: "Connected Health",
-    description:
-      "This project explores how embedded sensors, wireless communication, and cloud-connected data tools can expand rehabilitation access beyond traditional laboratory or clinical settings. The system concept supports remote monitoring, personalized progress tracking, and adaptive therapy parameter adjustment.",
-    points: ["Smart sensing and data logging", "Remote progress and usage monitoring", "Accessible home-based rehabilitation tools"],
-  },
+  { title: "ARMEX: 9-DOF Upper-Extremity Exoskeleton", tag: "Flagship Project", description: "ARMEX is the lab’s flagship upper-extremity rehabilitation platform. The system is being developed to support natural shoulder, elbow, forearm, and wrist movement while enabling personalized, robot-assisted therapy for users with impaired arm function. The project integrates mechanical design, dynamic modeling, nonlinear control, sensor feedback, and future AI-based adaptation.", points: ["Anatomically inspired 9-DOF arm assistance", "Trajectory tracking with nonlinear control", "Future EMG, AI, and FES integration"] },
+  { title: "Lower-Extremity Rehabilitation Exoskeleton", tag: "Biomechanics + Control", description: "This research focuses on modeling and control of lower-limb exoskeleton systems for gait rehabilitation and assistive mobility. Students derive kinematic and dynamic models, analyze actuator torque requirements, and benchmark control strategies under realistic uncertainty, friction, and payload conditions.", points: ["Kinematic and Lagrangian dynamic modeling", "Controller benchmarking under uncertainty", "Simulation-driven rehabilitation studies"] },
+  { title: "Digital Twin for Rehabilitation Robots", tag: "Simulation Intelligence", description: "The digital twin project connects physical robotic systems with real-time simulation models to support safer testing, controller tuning, predictive diagnostics, and remote performance monitoring. The goal is to create a data-informed virtual environment for rehabilitation planning and system-level decision support.", points: ["Real-time model and sensor synchronization", "Fault detection and predictive maintenance", "Remote visualization and therapy planning"] },
+  { title: "IoT-Enabled Robotic Rehabilitation", tag: "Connected Health", description: "This project explores how embedded sensors, wireless communication, and cloud-connected data tools can expand rehabilitation access beyond traditional laboratory or clinical settings. The system concept supports remote monitoring, personalized progress tracking, and adaptive therapy parameter adjustment.", points: ["Smart sensing and data logging", "Remote progress and usage monitoring", "Accessible home-based rehabilitation tools"] },
 ];
 
 const publications = [
@@ -95,827 +46,67 @@ const publications = [
 ];
 
 const team = [
-  {
-    name: "Dr. Sk Hasan",
-    role: "Assistant Professor and Lab Director",
-    details: "Director, Biomechatronics System Design Laboratory; Department of Mechanical and Manufacturing Engineering, Miami University, Oxford, OH.",
-    image: "https://sites.miamioh.edu/biomechatronics-system-design-laboratory/files/2021/09/Profile-Picture.jpg",
-  },
-  {
-    name: "Nafizul Alam",
-    role: "MS Student",
-    details: "Project: Biomechanical design of a human lower-extremity exoskeleton robot; Department of Mechanical and Manufacturing Engineering, Miami University.",
-    image: "https://sites.miamioh.edu/biomechatronics-system-design-laboratory/files/2024/12/NAFIZUL-ALAM.jpg",
-  },
-  {
-    name: "Gazi Abdullah Mashud",
-    role: "MS Student",
-    details: "Project: AI-assisted exoskeleton robot control; Department of Mechanical and Manufacturing Engineering, Miami University.",
-    image: "https://sites.miamioh.edu/biomechatronics-system-design-laboratory/files/2024/12/Gazi.jpg",
-  },
-  {
-    name: "Mahmud Nasim",
-    role: "MS Student",
-    details: "Project: Digital Twin for Industry 4.0; Department of Mechanical and Manufacturing Engineering, Miami University.",
-    image: "https://sites.miamioh.edu/biomechatronics-system-design-laboratory/files/2025/07/46d5a3dc-d3c1-41f2-96da-c2385e5d7012.png",
-  },
-  {
-    name: "Colin Crawford",
-    role: "Undergraduate Researcher, OSGC Scholar",
-    details: "Mechanical Engineering major; project: cooperative mobile robotics; Department of Mechanical and Manufacturing Engineering, Miami University.",
-    image: "https://sites.miamioh.edu/biomechatronics-system-design-laboratory/files/2024/12/Collin-1.jpg",
-  },
-  {
-    name: "Mark Hauptman",
-    role: "Undergraduate Researcher, OSGC Scholar",
-    details: "Computer Science and Mechanical Engineering major; project: obstacle avoidance drone system; College of Engineering, Miami University.",
-    image: "https://sites.miamioh.edu/biomechatronics-system-design-laboratory/files/2025/05/Mark-Hauptman-815x1024.jpeg",
-  },
-  {
-    name: "Subodh Bhujel",
-    role: "Lab Alumni",
-    details: "Graduated Spring 2023; project: biomechanical design and fabrication of a human upper-extremity exoskeleton robot; Miami University.",
-    image: "https://sites.miamioh.edu/biomechatronics-system-design-laboratory/files/2022/11/Bhujel-Babu-Subodh-O23423-1-edited-1-1024x1024.jpg",
-  },
+  ["Dr. Sk Hasan", "Assistant Professor and Lab Director", "Director, Biomechatronics System Design Laboratory; Department of Mechanical and Manufacturing Engineering, Miami University, Oxford, OH.", "https://sites.miamioh.edu/biomechatronics-system-design-laboratory/files/2021/09/Profile-Picture.jpg"],
+  ["Nafizul Alam", "MS Student", "Project: Biomechanical design of a human lower-extremity exoskeleton robot; Department of Mechanical and Manufacturing Engineering, Miami University.", "https://sites.miamioh.edu/biomechatronics-system-design-laboratory/files/2024/12/NAFIZUL-ALAM.jpg"],
+  ["Gazi Abdullah Mashud", "MS Student", "Project: AI-assisted exoskeleton robot control; Department of Mechanical and Manufacturing Engineering, Miami University.", "https://sites.miamioh.edu/biomechatronics-system-design-laboratory/files/2024/12/Gazi.jpg"],
+  ["Mahmud Nasim", "MS Student", "Project: Digital Twin for Industry 4.0; Department of Mechanical and Manufacturing Engineering, Miami University.", "https://sites.miamioh.edu/biomechatronics-system-design-laboratory/files/2025/07/46d5a3dc-d3c1-41f2-96da-c2385e5d7012.png"],
+  ["Colin Crawford", "Undergraduate Researcher, OSGC Scholar", "Mechanical Engineering major; project: cooperative mobile robotics; Department of Mechanical and Manufacturing Engineering, Miami University.", "https://sites.miamioh.edu/biomechatronics-system-design-laboratory/files/2024/12/Collin-1.jpg"],
+  ["Mark Hauptman", "Undergraduate Researcher, OSGC Scholar", "Computer Science and Mechanical Engineering major; project: obstacle avoidance drone system; College of Engineering, Miami University.", "https://sites.miamioh.edu/biomechatronics-system-design-laboratory/files/2025/05/Mark-Hauptman-815x1024.jpeg"],
+  ["Subodh Bhujel", "Lab Alumni", "Graduated Spring 2023; project: biomechanical design and fabrication of a human upper-extremity exoskeleton robot; Miami University.", "https://sites.miamioh.edu/biomechatronics-system-design-laboratory/files/2022/11/Bhujel-Babu-Subodh-O23423-1-edited-1-1024x1024.jpg"],
 ];
 
 const facilities = [
-  {
-    title: "Real-Time Control Hardware",
-    description: "NI PXI, FPGA, DAQ, and embedded control platforms support deterministic motor control, sensor acquisition, safety monitoring, and experimental validation of robotic systems.",
-  },
-  {
-    title: "Modeling and Simulation Software",
-    description: "MATLAB, Simulink, Simscape, and LabVIEW are used to develop dynamic models, test controllers, analyze system response, and prepare students for modern mechatronics workflows.",
-  },
-  {
-    title: "Embedded Systems and Electronics",
-    description: "Microcontrollers, PCB design tools, sensor interfaces, motor drivers, and communication modules allow students to build complete hardware-software systems from concept to prototype.",
-  },
-  {
-    title: "Mechanical Design and Fabrication",
-    description: "CAD/CAM tools, SolidWorks, Fusion, Creo, CNC machining, and hands-on fabrication resources support the development of custom exoskeleton components and robotic testbeds.",
-  },
-  {
-    title: "Sensors, Actuators, and Instrumentation",
-    description: "The lab uses encoders, IMUs, strain sensors, BLDC motors, servomotors, DAQ modules, and physiological sensors to measure, control, and evaluate human-machine systems.",
-  },
-  {
-    title: "Robotics and Automation Testbeds",
-    description: "Mobile robots, drones, rehabilitation devices, and mechatronic platforms provide students with hands-on environments for autonomy, control, sensing, and system integration research.",
-  },
+  ["Real-Time Control Hardware", "NI PXI, FPGA, DAQ, and embedded control platforms support deterministic motor control, sensor acquisition, safety monitoring, and experimental validation of robotic systems."],
+  ["Modeling and Simulation Software", "MATLAB, Simulink, Simscape, and LabVIEW are used to develop dynamic models, test controllers, analyze system response, and prepare students for modern mechatronics workflows."],
+  ["Embedded Systems and Electronics", "Microcontrollers, PCB design tools, sensor interfaces, motor drivers, and communication modules allow students to build complete hardware-software systems from concept to prototype."],
+  ["Mechanical Design and Fabrication", "CAD/CAM tools, SolidWorks, Fusion, Creo, CNC machining, and hands-on fabrication resources support the development of custom exoskeleton components and robotic testbeds."],
+  ["Sensors, Actuators, and Instrumentation", "The lab uses encoders, IMUs, strain sensors, BLDC motors, servomotors, DAQ modules, and physiological sensors to measure, control, and evaluate human-machine systems."],
+  ["Robotics and Automation Testbeds", "Mobile robots, drones, rehabilitation devices, and mechatronic platforms provide students with hands-on environments for autonomy, control, sensing, and system integration research."],
 ];
 
 const teaching = [
-  {
-    title: "MME 305: Measurements and Instrumentation",
-    description: "Students learn sensor principles, data acquisition, calibration, uncertainty, signal processing, and experimental methods through hands-on laboratory activities.",
-  },
-  {
-    title: "MME 321: System Modeling, Analysis, and Control",
-    description: "This course connects mathematical modeling, transfer functions, state-space methods, simulation, and control analysis using MATLAB, Simulink, and laboratory examples.",
-  },
-  {
-    title: "MME/ECE 436/536: Control of Dynamic Systems",
-    description: "Students study feedback control, stability, transient response, frequency-domain design, and implementation concepts for mechanical, electrical, and mechatronic systems.",
-  },
-  {
-    title: "MME 438/538: Mechanics, Analysis, and Control of Robots",
-    description: "This robotics course covers kinematics, dynamics, trajectory planning, Jacobians, robot control, and simulation-based analysis of serial and wearable robotic systems.",
-  },
-  {
-    title: "Senior Design and Multidisciplinary Projects",
-    description: "Students work on open-ended engineering problems involving robotics, automation, assistive devices, embedded systems, CAD/CAM, controls, and experimental validation.",
-  },
+  ["MME 305: Measurements and Instrumentation", "Students learn sensor principles, data acquisition, calibration, uncertainty, signal processing, and experimental methods through hands-on laboratory activities."],
+  ["MME 321: System Modeling, Analysis, and Control", "This course connects mathematical modeling, transfer functions, state-space methods, simulation, and control analysis using MATLAB, Simulink, and laboratory examples."],
+  ["MME/ECE 436/536: Control of Dynamic Systems", "Students study feedback control, stability, transient response, frequency-domain design, and implementation concepts for mechanical, electrical, and mechatronic systems."],
+  ["MME 438/538: Mechanics, Analysis, and Control of Robots", "This robotics course covers kinematics, dynamics, trajectory planning, Jacobians, robot control, and simulation-based analysis of serial and wearable robotic systems."],
+  ["Senior Design and Multidisciplinary Projects", "Students work on open-ended engineering problems involving robotics, automation, assistive devices, embedded systems, CAD/CAM, controls, and experimental validation."],
 ];
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 28 },
-  show: { opacity: 1, y: 0 },
-};
+const fadeUp = { hidden: { opacity: 0, y: 28 }, show: { opacity: 1, y: 0 } };
+const staggerContainer = { hidden: {}, show: { transition: { staggerChildren: 0.08 } } };
 
-const staggerContainer = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.08 } },
-};
-
-function scrollToId(id) {
-  const el = document.getElementById(id);
-  if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-}
-
-function RedCornerFrame({ className = "" }) {
-  return (
-    <div className={`pointer-events-none absolute ${className}`}>
-      <div className="h-16 w-16 rounded-tl-md border-l-[18px] border-t-[18px] border-[#C41230]" />
-    </div>
-  );
-}
-
-function AngledRibbon({ children, inverse = false }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, x: -12 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true }}
-      whileHover={{ x: 4 }}
-      className={`inline-block rounded-md px-4 py-2 text-xs font-black not-italic uppercase tracking-[0.18em] ${inverse ? "bg-white text-[#C41230]" : "bg-[#C41230] text-white"}`}
-    >
-      {children}
-    </motion.div>
-  );
-}
-
-function SectionHeader({ eyebrow, title, children, red = false }) {
-  return (
-    <div className="mx-auto mb-12 max-w-3xl text-center">
-      <AngledRibbon inverse={red}>{eyebrow}</AngledRibbon>
-      <motion.h2
-        initial={{ opacity: 0, y: 18 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6, delay: 0.05 }}
-        className={`mt-5 text-3xl font-black tracking-tight md:text-5xl ${red ? "text-white" : "text-[#C41230]"}`}
-        style={{ fontFamily: "Proxima Nova, Arial, sans-serif" }}
-      >
-        {title}
-      </motion.h2>
-      {children && (
-        <motion.p
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.55, delay: 0.12 }}
-          className={`mx-auto mt-5 max-w-2xl text-base leading-8 md:text-lg ${red ? "text-white" : "text-black/75"}`}
-          style={{ fontFamily: "Georgia, serif" }}
-        >
-          {children}
-        </motion.p>
-      )}
-    </div>
-  );
-}
-
-function Monogram({ children, inverse = false }) {
-  return (
-    <motion.div
-      animate={{ y: [0, -4, 0] }}
-      transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut" }}
-      className={`grid h-14 w-14 place-items-center rounded-full border-2 text-sm font-black ${inverse ? "border-white bg-white text-[#C41230]" : "border-[#C41230] bg-[#C41230] text-white"}`}
-      style={{ fontFamily: "Proxima Nova, Arial, sans-serif" }}
-    >
-      {children}
-    </motion.div>
-  );
-}
-
-function BrandPattern({ light = false }) {
-  return (
-    <div className="pointer-events-none absolute inset-0 overflow-hidden">
-      <motion.div
-        animate={{ rotate: [0, 360] }}
-        transition={{ duration: 55, repeat: Infinity, ease: "linear" }}
-        className={`absolute -right-24 top-24 h-80 w-80 rounded-full border ${light ? "border-[#C41230]/20" : "border-white/25"}`}
-      />
-      <motion.div
-        animate={{ rotate: [360, 0] }}
-        transition={{ duration: 70, repeat: Infinity, ease: "linear" }}
-        className={`absolute -left-20 bottom-16 h-64 w-64 rounded-full border ${light ? "border-[#C41230]/15" : "border-white/20"}`}
-      />
-      <div className={`absolute inset-0 ${light ? "bg-[radial-gradient(circle_at_1px_1px,rgba(196,18,48,0.16)_1px,transparent_0)]" : "bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.22)_1px,transparent_0)]"} [background-size:30px_30px]`} />
-    </div>
-  );
-}
+function scrollToId(id) { document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" }); }
+function Corner({ className = "" }) { return <div className={`pointer-events-none absolute ${className}`}><div className="h-16 w-16 rounded-tl-md border-l-[18px] border-t-[18px] border-[#C41230]" /></div>; }
+function Ribbon({ children, inverse = false }) { return <motion.div initial={{ opacity: 0, x: -12 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} whileHover={{ x: 4 }} className={`inline-block rounded-md px-4 py-2 text-xs font-black not-italic uppercase tracking-[0.18em] ${inverse ? "bg-white text-[#C41230]" : "bg-[#C41230] text-white"}`}>{children}</motion.div>; }
+function Monogram({ children, inverse = false }) { return <motion.div animate={{ y: [0, -4, 0] }} transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut" }} className={`grid h-14 w-14 place-items-center rounded-full border-2 text-sm font-black ${inverse ? "border-white bg-white text-[#C41230]" : "border-[#C41230] bg-[#C41230] text-white"}`}>{children}</motion.div>; }
+function Pattern({ light = false }) { return <div className="pointer-events-none absolute inset-0 overflow-hidden"><motion.div animate={{ rotate: [0, 360] }} transition={{ duration: 55, repeat: Infinity, ease: "linear" }} className={`absolute -right-24 top-24 h-80 w-80 rounded-full border ${light ? "border-[#C41230]/20" : "border-white/25"}`} /><motion.div animate={{ rotate: [360, 0] }} transition={{ duration: 70, repeat: Infinity, ease: "linear" }} className={`absolute -left-20 bottom-16 h-64 w-64 rounded-full border ${light ? "border-[#C41230]/15" : "border-white/20"}`} /><div className={`absolute inset-0 ${light ? "bg-[radial-gradient(circle_at_1px_1px,rgba(196,18,48,0.16)_1px,transparent_0)]" : "bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.22)_1px,transparent_0)]"} [background-size:30px_30px]`} /></div>; }
+function SectionHeader({ eyebrow, title, children, red = false }) { return <div className="mx-auto mb-12 max-w-3xl text-center"><Ribbon inverse={red}>{eyebrow}</Ribbon><motion.h2 initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.05 }} className={`mt-5 text-3xl font-black tracking-tight md:text-5xl ${red ? "text-white" : "text-[#C41230]"}`}>{title}</motion.h2>{children && <motion.p initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.55, delay: 0.12 }} className={`mx-auto mt-5 max-w-2xl text-base leading-8 md:text-lg ${red ? "text-white" : "text-black/75"}`}>{children}</motion.p>}</div>; }
 
 function Header() {
   const [open, setOpen] = useState(false);
-
-  return (
-    <motion.header
-      initial={{ y: -80, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6 }}
-      className="fixed inset-x-0 top-0 z-50 border-b border-[#EDECE2] bg-white/95 backdrop-blur-xl"
-    >
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 lg:px-8">
-        <motion.button whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }} onClick={() => scrollToId("home")} className="group flex items-center gap-3 text-left">
-          <motion.div animate={{ boxShadow: ["0 8px 18px rgba(196,18,48,0.12)", "0 12px 30px rgba(196,18,48,0.24)", "0 8px 18px rgba(196,18,48,0.12)"] }} transition={{ duration: 3, repeat: Infinity }} className="grid h-11 w-11 place-items-center rounded-full bg-[#C41230] text-xl font-black text-white">B</motion.div>
-          <div>
-            <div className="text-sm font-black uppercase tracking-[0.2em] text-[#C41230]">Biomechatronics</div>
-            <div className="text-xs font-medium text-black/65">System Design Laboratory</div>
-          </div>
-        </motion.button>
-
-        <nav className="hidden items-center gap-1 lg:flex">
-          {navItems.map((item) => (
-            <motion.button
-              key={item.id}
-              whileHover={{ y: -2 }}
-              whileTap={{ scale: 0.96 }}
-              onClick={() => scrollToId(item.id)}
-              className="rounded-full px-4 py-2 text-sm font-bold text-black/70 transition hover:bg-[#C41230] hover:text-white"
-            >
-              {item.label}
-            </motion.button>
-          ))}
-        </nav>
-
-        <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
-          <Button onClick={() => scrollToId("contact")} className="hidden rounded-md border-2 border-[#C41230] bg-white px-5 font-bold text-[#C41230] hover:bg-[#C41230] hover:text-white lg:inline-flex">
-            Contact Us
-          </Button>
-        </motion.div>
-
-        <motion.button whileTap={{ scale: 0.9 }} className="rounded-xl p-2 text-[#C41230] lg:hidden" onClick={() => setOpen(!open)} aria-label="Open navigation menu">
-          {open ? "✕" : "☰"}
-        </motion.button>
-      </div>
-
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            className="overflow-hidden border-t border-[#EDECE2] bg-white lg:hidden"
-          >
-            <motion.div variants={staggerContainer} initial="hidden" animate="show" className="grid gap-1 px-5 py-4">
-              {navItems.map((item) => (
-                <motion.button
-                  variants={fadeUp}
-                  key={item.id}
-                  onClick={() => {
-                    scrollToId(item.id);
-                    setOpen(false);
-                  }}
-                  className="rounded-xl px-4 py-3 text-left text-sm font-bold text-black/75 hover:bg-[#C41230] hover:text-white"
-                >
-                  {item.label}
-                </motion.button>
-              ))}
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.header>
-  );
+  return <motion.header initial={{ y: -80, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.6 }} className="fixed inset-x-0 top-0 z-50 border-b border-[#EDECE2] bg-white/95 backdrop-blur-xl"><div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 lg:px-8"><motion.button whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }} onClick={() => scrollToId("home")} className="group flex items-center gap-3 text-left"><motion.div animate={{ boxShadow: ["0 8px 18px rgba(196,18,48,0.12)", "0 12px 30px rgba(196,18,48,0.24)", "0 8px 18px rgba(196,18,48,0.12)"] }} transition={{ duration: 3, repeat: Infinity }} className="grid h-11 w-11 place-items-center rounded-full bg-[#C41230] text-xl font-black text-white">B</motion.div><div><div className="text-sm font-black uppercase tracking-[0.2em] text-[#C41230]">Biomechatronics</div><div className="text-xs font-medium text-black/65">System Design Laboratory</div></div></motion.button><nav className="hidden items-center gap-1 lg:flex">{navItems.map((item) => <motion.button key={item.id} whileHover={{ y: -2 }} whileTap={{ scale: 0.96 }} onClick={() => scrollToId(item.id)} className="rounded-full px-4 py-2 text-sm font-bold text-black/70 transition hover:bg-[#C41230] hover:text-white">{item.label}</motion.button>)}</nav><motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}><a href={emailUrl} className="hidden rounded-md border-2 border-[#C41230] bg-white px-5 py-2 font-bold text-[#C41230] transition hover:bg-[#C41230] hover:text-white lg:inline-flex">Contact Us</a></motion.div><motion.button whileTap={{ scale: 0.9 }} className="rounded-xl p-2 text-[#C41230] lg:hidden" onClick={() => setOpen(!open)} aria-label="Open navigation menu">{open ? "✕" : "☰"}</motion.button></div><AnimatePresence>{open && <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden border-t border-[#EDECE2] bg-white lg:hidden"><motion.div variants={staggerContainer} initial="hidden" animate="show" className="grid gap-1 px-5 py-4">{navItems.map((item) => <motion.button variants={fadeUp} key={item.id} onClick={() => { scrollToId(item.id); setOpen(false); }} className="rounded-xl px-4 py-3 text-left text-sm font-bold text-black/75 hover:bg-[#C41230] hover:text-white">{item.label}</motion.button>)}<motion.a variants={fadeUp} href={emailUrl} className="rounded-xl px-4 py-3 text-left text-sm font-bold text-[#C41230] hover:bg-[#C41230] hover:text-white">Contact Us</motion.a></motion.div></motion.div>}</AnimatePresence></motion.header>;
 }
 
-function Hero() {
-  return (
-    <section id="home" className="relative min-h-screen overflow-hidden bg-[#C41230] pt-28 text-white">
-      <BrandPattern />
-      <motion.div animate={{ x: [0, 20, 0], y: [0, -18, 0] }} transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }} className="pointer-events-none absolute right-[8%] top-[20%] h-48 w-48 rounded-full bg-white/15 blur-3xl" />
-      <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-5 pb-20 pt-10 lg:grid-cols-[1.1fr_0.9fr] lg:px-8 lg:pt-20">
-        <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
-          <motion.div
-            initial={{ opacity: 0, x: -12 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-            className="inline-block rounded-md bg-white px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-[#C41230]"
-          >
-            Miami University · Oxford, Ohio
-          </motion.div>
-          <motion.h1 initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.08 }} className="mt-8 max-w-4xl text-5xl font-black uppercase leading-[0.95] tracking-tight md:text-7xl lg:text-8xl" style={{ fontFamily: "Proxima Nova, Arial, sans-serif" }}>
-            Intelligent Robotics for Human-Centered Rehabilitation
-          </motion.h1>
-          <motion.p initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.2 }} className="mt-7 max-w-2xl text-lg leading-8 text-white md:text-xl" style={{ fontFamily: "Georgia, serif" }}>
-            The Biomechatronics System Design Laboratory advances exoskeleton robotics, nonlinear control, AI-enabled autonomy, digital twins, and mechatronic systems that enhance human capability and quality of life. Our research connects rigorous engineering models with real hardware implementation so students can translate theory into working systems that address rehabilitation, accessibility, and intelligent automation challenges.
-          </motion.p>
-          <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.32 }} className="mt-9 flex flex-col gap-4 sm:flex-row">
-            <motion.div whileHover={{ y: -3 }} whileTap={{ scale: 0.97 }}>
-              <Button onClick={() => scrollToId("projects")} className="h-12 rounded-md bg-white px-7 text-base font-black text-[#C41230] hover:bg-[#EDECE2]">
-                Explore Projects →
-              </Button>
-            </motion.div>
-            <motion.div whileHover={{ y: -3 }} whileTap={{ scale: 0.97 }}>
-              <Button onClick={() => scrollToId("opportunities")} className="h-12 rounded-md border-2 border-white bg-transparent px-7 text-base font-black text-white hover:bg-white hover:text-[#C41230]">
-                Join the Lab
-              </Button>
-            </motion.div>
-          </motion.div>
+function Hero() { return <section id="home" className="relative min-h-screen overflow-hidden bg-[#C41230] pt-28 text-white"><Pattern /><motion.div animate={{ x: [0, 20, 0], y: [0, -18, 0] }} transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }} className="pointer-events-none absolute right-[8%] top-[20%] h-48 w-48 rounded-full bg-white/15 blur-3xl" /><div className="relative mx-auto grid max-w-7xl items-center gap-12 px-5 pb-20 pt-10 lg:grid-cols-[1.1fr_0.9fr] lg:px-8 lg:pt-20"><motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}><motion.div initial={{ opacity: 0, x: -12 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }} className="inline-block rounded-md bg-white px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-[#C41230]">Miami University · Oxford, Ohio</motion.div><motion.h1 initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.08 }} className="mt-8 max-w-4xl text-5xl font-black uppercase leading-[0.95] tracking-tight md:text-7xl lg:text-8xl">Intelligent Robotics for Human-Centered Rehabilitation</motion.h1><motion.p initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.2 }} className="mt-7 max-w-2xl text-lg leading-8 text-white md:text-xl">The Biomechatronics System Design Laboratory advances exoskeleton robotics, nonlinear control, AI-enabled autonomy, digital twins, and mechatronic systems that enhance human capability and quality of life. Our research connects rigorous engineering models with real hardware implementation so students can translate theory into working systems that address rehabilitation, accessibility, and intelligent automation challenges.</motion.p><motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.32 }} className="mt-9 flex flex-col gap-4 sm:flex-row"><motion.div whileHover={{ y: -3 }} whileTap={{ scale: 0.97 }}><Button onClick={() => scrollToId("projects")} className="h-12 bg-white px-7 text-base text-[#C41230] hover:bg-[#EDECE2]">Explore Projects →</Button></motion.div><motion.div whileHover={{ y: -3 }} whileTap={{ scale: 0.97 }}><Button onClick={() => scrollToId("opportunities")} className="h-12 border-2 border-white bg-transparent px-7 text-base text-white hover:bg-white hover:text-[#C41230]">Join the Lab</Button></motion.div></motion.div><motion.div variants={staggerContainer} initial="hidden" animate="show" className="mt-12 grid max-w-2xl grid-cols-3 gap-4">{[["9", "DOF Upper-Limb Platform"], ["AI", "Adaptive Control"], ["100%", "Hands-on Research"]].map(([stat, label]) => <motion.div variants={fadeUp} whileHover={{ y: -6 }} key={stat} className="border border-white bg-white p-5 text-[#C41230]"><div className="text-4xl font-black md:text-5xl">{stat}</div><div className="mt-2 text-xs font-black uppercase tracking-wide">{label}</div></motion.div>)}</motion.div></motion.div><motion.div initial={{ opacity: 0, scale: 0.92, rotate: -2 }} animate={{ opacity: 1, scale: 1, rotate: 0 }} transition={{ duration: 0.8, delay: 0.15 }} className="relative"><motion.div whileHover={{ rotate: 0.6, y: -6 }} transition={{ type: "spring", stiffness: 160, damping: 18 }} className="relative overflow-hidden rounded-xl bg-white p-4 shadow-2xl"><Corner className="left-0 top-0" /><div className="rounded-lg border-2 border-[#C41230] bg-[#FAF9F7] p-8 text-black"><div className="mb-8 flex items-center justify-between"><div><div className="text-sm font-black uppercase tracking-[0.2em] text-[#C41230]">Research Engine</div><div className="mt-2 text-3xl font-black text-black">Human + Robot + AI</div></div><Monogram>AI</Monogram></div><motion.div variants={staggerContainer} initial="hidden" animate="show" className="space-y-4">{[["Biomechanical Modeling", "Kinematics, dynamics, torque prediction"], ["Adaptive Control", "Real-time nonlinear and robust algorithms"], ["Intelligent Sensing", "Physiological, kinematic, and embedded data"], ["Translation", "Accessible assistive and rehabilitation robotics"]].map(([a, b]) => <motion.div key={a} variants={fadeUp} whileHover={{ x: 8 }} className="rounded-md border-l-4 border-[#C41230] bg-white p-5"><div className="font-black uppercase tracking-wide text-[#C41230]">{a}</div><div className="mt-1 text-sm text-black/75">{b}</div></motion.div>)}</motion.div></div></motion.div></motion.div></div></section>; }
 
-          <motion.div variants={staggerContainer} initial="hidden" animate="show" className="mt-12 grid max-w-2xl grid-cols-3 gap-4">
-            {[
-              ["9", "DOF Upper-Limb Platform"],
-              ["AI", "Adaptive Control"],
-              ["100%", "Hands-on Research"],
-            ].map(([stat, label]) => (
-              <motion.div variants={fadeUp} whileHover={{ y: -6 }} key={stat} className="border border-white bg-white p-5 text-[#C41230]">
-                <div className="text-4xl font-black md:text-5xl" style={{ fontFamily: "Georgia, serif" }}>{stat}</div>
-                <div className="mt-2 text-xs font-black uppercase tracking-wide">{label}</div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </motion.div>
+function Research() { return <section id="research" className="relative overflow-hidden bg-white px-5 py-24 lg:px-8"><Pattern light /><SectionHeader eyebrow="Research Vision" title="Where Robotics, Intelligence, and Human Movement Meet">Our lab develops complete robotic systems, from mechanical design and dynamic modeling to embedded control, AI-based decision making, and experimental validation. Each research thrust is intentionally connected to hands-on student training, scholarly publication, and practical applications in rehabilitation, assistive technology, and cyber-physical systems.</SectionHeader><motion.div variants={staggerContainer} initial="hidden" whileInView="show" viewport={{ once: true }} className="relative mx-auto grid max-w-7xl gap-5 md:grid-cols-2 lg:grid-cols-4">{researchThrusts.map(([icon, title, text]) => <motion.div key={title} variants={fadeUp} whileHover={{ y: -10 }} transition={{ type: "spring", stiffness: 160, damping: 18 }}><Card className="group h-full overflow-hidden rounded-xl border-2 border-[#C41230] bg-white shadow-lg transition hover:shadow-2xl"><CardContent className="p-7"><div className="mb-6"><Monogram>{icon}</Monogram></div><h3 className="text-xl font-black uppercase text-[#C41230]">{title}</h3><p className="mt-4 leading-7 text-black/75">{text}</p></CardContent></Card></motion.div>)}</motion.div></section>; }
 
-        <motion.div
-          initial={{ opacity: 0, scale: 0.92, rotate: -2 }}
-          animate={{ opacity: 1, scale: 1, rotate: 0 }}
-          transition={{ duration: 0.8, delay: 0.15 }}
-          className="relative"
-        >
-          <motion.div whileHover={{ rotate: 0.6, y: -6 }} transition={{ type: "spring", stiffness: 160, damping: 18 }} className="relative overflow-hidden rounded-xl bg-white p-4 shadow-2xl">
-            <RedCornerFrame className="left-0 top-0" />
-            <div className="rounded-lg border-2 border-[#C41230] bg-[#FAF9F7] p-8 text-black">
-              <div className="mb-8 flex items-center justify-between">
-                <div>
-                  <div className="text-sm font-black uppercase tracking-[0.2em] text-[#C41230]">Research Engine</div>
-                  <div className="mt-2 text-3xl font-black text-black">Human + Robot + AI</div>
-                </div>
-                <Monogram>AI</Monogram>
-              </div>
-              <motion.div variants={staggerContainer} initial="hidden" animate="show" className="space-y-4">
-                {[
-                  ["Biomechanical Modeling", "Kinematics, dynamics, torque prediction"],
-                  ["Adaptive Control", "Real-time nonlinear and robust algorithms"],
-                  ["Intelligent Sensing", "Physiological, kinematic, and embedded data"],
-                  ["Translation", "Accessible assistive and rehabilitation robotics"],
-                ].map(([a, b]) => (
-                  <motion.div
-                    key={a}
-                    variants={fadeUp}
-                    whileHover={{ x: 8 }}
-                    className="rounded-md border-l-4 border-[#C41230] bg-white p-5"
-                  >
-                    <div className="font-black uppercase tracking-wide text-[#C41230]">{a}</div>
-                    <div className="mt-1 text-sm text-black/75">{b}</div>
-                  </motion.div>
-                ))}
-              </motion.div>
-            </div>
-          </motion.div>
-        </motion.div>
-      </div>
-    </section>
-  );
-}
+function Projects() { const [active, setActive] = useState(0); const selected = projects[active]; return <section id="projects" className="relative overflow-hidden bg-[#C41230] px-5 py-24 text-white lg:px-8"><Pattern /><SectionHeader red eyebrow="Flagship Projects" title="Research Platforms Built for Impact">Each project connects theory, simulation, hardware, and hands-on student research to solve real problems in rehabilitation and intelligent systems. These platforms serve as research testbeds where students investigate modeling fidelity, controller robustness, sensing architecture, human interaction, and translational deployment.</SectionHeader><div className="relative mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.9fr_1.1fr]"><motion.div variants={staggerContainer} initial="hidden" whileInView="show" viewport={{ once: true }} className="space-y-3">{projects.map((project, idx) => <motion.button variants={fadeUp} whileHover={{ x: 8 }} whileTap={{ scale: 0.98 }} key={project.title} onClick={() => setActive(idx)} className={`w-full rounded-lg border-2 p-5 text-left transition ${active === idx ? "border-white bg-white text-[#C41230]" : "border-white bg-[#C41230] text-white hover:bg-[#AD102A]"}`}><div className="flex items-center justify-between gap-4"><div><div className={`text-sm font-black uppercase tracking-[0.18em] ${active === idx ? "text-[#AD102A]" : "text-white"}`}>{project.tag}</div><div className="mt-2 text-xl font-black uppercase">{project.title}</div></div><motion.div animate={{ x: active === idx ? [0, 4, 0] : 0 }} transition={{ duration: 1.2, repeat: active === idx ? Infinity : 0 }} className="text-2xl">›</motion.div></div></motion.button>)}</motion.div><AnimatePresence mode="wait"><motion.div key={selected.title} initial={{ opacity: 0, y: 24, scale: 0.97 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: -20, scale: 0.98 }} transition={{ duration: 0.4 }} className="relative overflow-hidden rounded-xl bg-white p-8 text-[#C41230] shadow-2xl"><Corner className="right-0 top-0 rotate-90" /><Ribbon>{selected.tag}</Ribbon><motion.h3 initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.05 }} className="mt-14 max-w-2xl text-4xl font-black uppercase tracking-tight md:text-5xl">{selected.title}</motion.h3><motion.p initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="mt-6 max-w-3xl text-lg leading-8 text-black/75">{selected.description}</motion.p><motion.div variants={staggerContainer} initial="hidden" animate="show" className="mt-10 grid gap-4 md:grid-cols-3">{selected.points.map((point) => <motion.div variants={fadeUp} whileHover={{ y: -6 }} key={point} className="rounded-lg border-2 border-[#C41230] bg-[#FAF9F7] p-5"><motion.div animate={{ scale: [1, 1.2, 1] }} transition={{ duration: 1.8, repeat: Infinity }} className="mb-4 text-2xl text-[#C41230]">✓</motion.div><div className="font-black uppercase text-black">{point}</div></motion.div>)}</motion.div></motion.div></AnimatePresence></div></section>; }
 
-function Research() {
-  return (
-    <section id="research" className="relative overflow-hidden bg-white px-5 py-24 lg:px-8">
-      <BrandPattern light />
-      <SectionHeader eyebrow="Research Vision" title="Where Robotics, Intelligence, and Human Movement Meet">
-        Our lab develops complete robotic systems, from mechanical design and dynamic modeling to embedded control, AI-based decision making, and experimental validation. Each research thrust is intentionally connected to hands-on student training, scholarly publication, and practical applications in rehabilitation, assistive technology, and cyber-physical systems.
-      </SectionHeader>
-      <motion.div variants={staggerContainer} initial="hidden" whileInView="show" viewport={{ once: true }} className="relative mx-auto grid max-w-7xl gap-5 md:grid-cols-2 lg:grid-cols-4">
-        {researchThrusts.map((item) => (
-          <motion.div key={item.title} variants={fadeUp} whileHover={{ y: -10 }} transition={{ type: "spring", stiffness: 160, damping: 18 }}>
-            <Card className="group h-full overflow-hidden rounded-xl border-2 border-[#C41230] bg-white shadow-lg transition hover:shadow-2xl">
-              <CardContent className="p-7">
-                <div className="mb-6"><Monogram>{item.icon}</Monogram></div>
-                <h3 className="text-xl font-black uppercase text-[#C41230]">{item.title}</h3>
-                <p className="mt-4 leading-7 text-black/75" style={{ fontFamily: "Georgia, serif" }}>{item.text}</p>
-              </CardContent>
-            </Card>
-          </motion.div>
-        ))}
-      </motion.div>
-    </section>
-  );
-}
+function Facilities() { return <section id="facilities" className="relative overflow-hidden bg-[#FAF9F7] px-5 py-24 lg:px-8"><SectionHeader eyebrow="Lab Infrastructure" title="A Complete Ecosystem for Mechatronic System Development">Students gain experience across modeling, fabrication, electronics, embedded control, data acquisition, and experimental robotics. The laboratory infrastructure is organized to support the complete mechatronic development cycle, from mathematical modeling and CAD design to embedded implementation, testing, data analysis, and technical communication.</SectionHeader><motion.div variants={staggerContainer} initial="hidden" whileInView="show" viewport={{ once: true }} className="mx-auto grid max-w-7xl gap-5 md:grid-cols-2 lg:grid-cols-3">{facilities.map(([title, description], idx) => <motion.div key={title} variants={fadeUp} whileHover={{ y: -8 }} transition={{ type: "spring", stiffness: 160, damping: 18 }} className="relative rounded-xl border-2 border-[#C41230] bg-white p-6 shadow-lg"><div className="mb-5 flex items-center gap-4"><div className="grid h-10 w-10 place-items-center rounded-md bg-[#C41230] text-sm font-black text-white">{String(idx + 1).padStart(2, "0")}</div><div className="h-px flex-1 bg-[#C41230]" /></div><div className="text-lg font-black uppercase text-black">{title}</div><p className="mt-3 leading-7 text-black/70">{description}</p></motion.div>)}</motion.div></section>; }
 
-function Projects() {
-  const [active, setActive] = useState(0);
-  const selected = projects[active];
+function Team() { return <section id="team" className="relative overflow-hidden bg-white px-5 py-24 text-black lg:px-8"><Pattern light /><SectionHeader eyebrow="People" title="Students and Researchers Building the Future of Intelligent Robotics">The lab mentors undergraduate and graduate students through research projects, publications, prototypes, presentations, and hands-on engineering practice. Students are encouraged to take ownership of meaningful research questions, develop technical independence, collaborate across disciplines, and communicate results through posters, manuscripts, demonstrations, and conference presentations.</SectionHeader><motion.div variants={staggerContainer} initial="hidden" whileInView="show" viewport={{ once: true }} className="relative mx-auto grid max-w-7xl gap-6 md:grid-cols-2 lg:grid-cols-3">{team.map(([name, role, details, image]) => <motion.div key={name} variants={fadeUp} whileHover={{ y: -10 }} transition={{ type: "spring", stiffness: 150, damping: 18 }} className="group rounded-xl border-2 border-[#C41230] bg-white p-6 hover:shadow-2xl"><motion.img whileHover={{ scale: 1.04 }} src={image} alt={`${name} profile`} className="mb-5 h-28 w-28 rounded-full border-4 border-[#C41230] object-cover shadow-lg" /><h3 className="text-2xl font-black uppercase text-[#C41230]">{name}</h3><div className="mt-2 font-black text-black">{role}</div><p className="mt-3 leading-7 text-black/70">{details}</p></motion.div>)}</motion.div></section>; }
 
-  return (
-    <section id="projects" className="relative overflow-hidden bg-[#C41230] px-5 py-24 text-white lg:px-8">
-      <BrandPattern />
-      <SectionHeader red eyebrow="Flagship Projects" title="Research Platforms Built for Impact">
-        Each project connects theory, simulation, hardware, and hands-on student research to solve real problems in rehabilitation and intelligent systems. These platforms serve as research testbeds where students investigate modeling fidelity, controller robustness, sensing architecture, human interaction, and translational deployment.
-      </SectionHeader>
-      <div className="relative mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.9fr_1.1fr]">
-        <motion.div variants={staggerContainer} initial="hidden" whileInView="show" viewport={{ once: true }} className="space-y-3">
-          {projects.map((project, idx) => (
-            <motion.button
-              variants={fadeUp}
-              whileHover={{ x: 8 }}
-              whileTap={{ scale: 0.98 }}
-              key={project.title}
-              onClick={() => setActive(idx)}
-              className={`w-full rounded-lg border-2 p-5 text-left transition ${active === idx ? "border-white bg-white text-[#C41230]" : "border-white bg-[#C41230] text-white hover:bg-[#AD102A]"}`}
-            >
-              <div className="flex items-center justify-between gap-4">
-                <div>
-                  <div className={`text-sm font-black uppercase tracking-[0.18em] ${active === idx ? "text-[#AD102A]" : "text-white"}`}>{project.tag}</div>
-                  <div className="mt-2 text-xl font-black uppercase">{project.title}</div>
-                </div>
-                <motion.div animate={{ x: active === idx ? [0, 4, 0] : 0 }} transition={{ duration: 1.2, repeat: active === idx ? Infinity : 0 }} className="text-2xl">›</motion.div>
-              </div>
-            </motion.button>
-          ))}
-        </motion.div>
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={selected.title}
-            initial={{ opacity: 0, y: 24, scale: 0.97 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -20, scale: 0.98 }}
-            transition={{ duration: 0.4 }}
-            className="relative overflow-hidden rounded-xl bg-white p-8 text-[#C41230] shadow-2xl"
-          >
-            <RedCornerFrame className="right-0 top-0 rotate-90" />
-            <AngledRibbon>{selected.tag}</AngledRibbon>
-            <motion.h3 initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.05 }} className="mt-14 max-w-2xl text-4xl font-black uppercase tracking-tight md:text-5xl">{selected.title}</motion.h3>
-            <motion.p initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="mt-6 max-w-3xl text-lg leading-8 text-black/75" style={{ fontFamily: "Georgia, serif" }}>{selected.description}</motion.p>
-            <motion.div variants={staggerContainer} initial="hidden" animate="show" className="mt-10 grid gap-4 md:grid-cols-3">
-              {selected.points.map((point) => (
-                <motion.div variants={fadeUp} whileHover={{ y: -6 }} key={point} className="rounded-lg border-2 border-[#C41230] bg-[#FAF9F7] p-5">
-                  <motion.div animate={{ scale: [1, 1.2, 1] }} transition={{ duration: 1.8, repeat: Infinity }} className="mb-4 text-2xl text-[#C41230]">✓</motion.div>
-                  <div className="font-black uppercase text-black">{point}</div>
-                </motion.div>
-              ))}
-            </motion.div>
-          </motion.div>
-        </AnimatePresence>
-      </div>
-    </section>
-  );
-}
+function Publications() { return <section id="publications" className="bg-[#C41230] px-5 py-24 text-white lg:px-8"><SectionHeader red eyebrow="Selected Publications" title="Scholarship in Exoskeleton Robotics, Control, and Intelligent Systems">Selected recent journal publications and research outputs from the lab and collaborators. This work reflects the lab’s emphasis on rehabilitation robotics, exoskeleton design, nonlinear and intelligent control, simulation-driven evaluation, and systematic review of emerging technologies in assistive and cyber-physical systems.</SectionHeader><motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="relative mx-auto max-w-6xl overflow-hidden rounded-xl border-2 border-white bg-white p-8 text-black shadow-2xl md:p-10"><Corner className="right-0 top-0 rotate-90" /><div className="mb-8 flex flex-col justify-between gap-5 md:flex-row md:items-end"><div><Ribbon>Recent Publications</Ribbon><h3 className="mt-6 text-3xl font-black uppercase tracking-tight text-[#C41230] md:text-4xl">Recent Publications from the Laboratory</h3><p className="mt-4 max-w-3xl text-base leading-7 text-black/75">The following selected publications highlight recent contributions in rehabilitation exoskeleton robotics, intelligent control, biomechanical modeling, and systematic review of emerging technologies.</p></div><motion.a whileHover={{ y: -3 }} whileTap={{ scale: 0.97 }} href={scholarUrl} target="_blank" rel="noopener noreferrer" className="inline-flex shrink-0 items-center justify-center rounded-md border-2 border-[#C41230] bg-white px-6 py-2 font-black text-[#C41230] transition hover:bg-[#C41230] hover:text-white">View Full Publication List ↗</motion.a></div><motion.div variants={staggerContainer} initial="hidden" whileInView="show" viewport={{ once: true }} className="grid gap-4">{publications.map((pub, idx) => <motion.div key={pub} variants={fadeUp} whileHover={{ x: 8 }} className="flex gap-5 rounded-lg border-2 border-[#C41230] bg-[#FAF9F7] p-5"><motion.div whileHover={{ rotate: 8 }} className="grid h-10 w-10 shrink-0 place-items-center rounded-md bg-[#C41230] text-sm font-black text-white">{idx + 1}</motion.div><div className="text-justify leading-7 text-black/80">{pub}</div></motion.div>)}</motion.div></motion.div></section>; }
 
-function Facilities() {
-  return (
-    <section id="facilities" className="relative overflow-hidden bg-[#FAF9F7] px-5 py-24 lg:px-8">
-      <SectionHeader eyebrow="Lab Infrastructure" title="A Complete Ecosystem for Mechatronic System Development">
-        Students gain experience across modeling, fabrication, electronics, embedded control, data acquisition, and experimental robotics. The laboratory infrastructure is organized to support the complete mechatronic development cycle, from mathematical modeling and CAD design to embedded implementation, testing, data analysis, and technical communication.
-      </SectionHeader>
-      <motion.div variants={staggerContainer} initial="hidden" whileInView="show" viewport={{ once: true }} className="mx-auto grid max-w-7xl gap-5 md:grid-cols-2 lg:grid-cols-3">
-        {facilities.map((item, idx) => (
-          <motion.div
-            key={item.title}
-            variants={fadeUp}
-            whileHover={{ y: -8 }}
-            transition={{ type: "spring", stiffness: 160, damping: 18 }}
-            className="relative rounded-xl border-2 border-[#C41230] bg-white p-6 shadow-lg"
-          >
-            <div className="mb-5 flex items-center gap-4">
-              <div className="grid h-10 w-10 place-items-center rounded-md bg-[#C41230] text-sm font-black text-white">{String(idx + 1).padStart(2, "0")}</div>
-              <div className="h-px flex-1 bg-[#C41230]" />
-            </div>
-            <div className="text-lg font-black uppercase text-black">{item.title}</div>
-            <p className="mt-3 leading-7 text-black/70" style={{ fontFamily: "Georgia, serif" }}>{item.description}</p>
-          </motion.div>
-        ))}
-      </motion.div>
-    </section>
-  );
-}
+function Teaching() { return <section id="teaching" className="relative overflow-hidden bg-white px-5 py-24 text-black lg:px-8"><SectionHeader eyebrow="Teaching and Outreach" title="Connecting Research, Classroom Learning, and Community Impact">The lab integrates robotics, control, modeling, instrumentation, and AI into courses, outreach activities, and student-led research experiences. Teaching and mentoring are designed to help students move from foundational concepts to practical engineering judgment through simulation, experimentation, design iteration, and professional communication.</SectionHeader><div className="relative mx-auto grid max-w-7xl gap-8 lg:grid-cols-2"><motion.div initial={{ opacity: 0, x: -28 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} whileHover={{ y: -6 }} className="rounded-xl border-2 border-[#C41230] bg-[#FAF9F7] p-8 shadow-2xl"><Ribbon>Courses</Ribbon><h3 className="mt-8 text-3xl font-black uppercase text-[#C41230]">Courses and Mentoring</h3><motion.div variants={staggerContainer} initial="hidden" whileInView="show" viewport={{ once: true }} className="mt-8 space-y-4">{teaching.map(([title, description]) => <motion.div variants={fadeUp} whileHover={{ x: 7 }} key={title} className="rounded-md border-l-4 border-[#C41230] bg-white p-4"><div className="font-black text-black">{title}</div><p className="mt-2 text-sm leading-6 text-black/70">{description}</p></motion.div>)}</motion.div></motion.div><motion.div variants={staggerContainer} initial="hidden" whileInView="show" viewport={{ once: true }} className="grid gap-5">{[["01", "Research Training", "Students learn scientific problem formulation, literature review, simulation, experiments, technical writing, and presentation."], ["02", "Inclusive Outreach", "K–12 and undergraduate activities introduce robotics, Arduino systems, sensors, automation, and assistive technology."], ["03", "Hands-on Engineering", "Projects emphasize complete system thinking: design, build, control, test, improve, document, and communicate."]].map(([num, title, text]) => <motion.div variants={fadeUp} whileHover={{ x: -6 }} key={title} className="rounded-xl border-2 border-[#C41230] bg-white p-7 shadow-xl"><div className="mb-5 text-4xl font-black text-[#C41230]">{num}</div><h3 className="text-2xl font-black uppercase text-black">{title}</h3><p className="mt-3 leading-7 text-black/75">{text}</p></motion.div>)}</motion.div></div></section>; }
 
-function Team() {
-  return (
-    <section id="team" className="relative overflow-hidden bg-white px-5 py-24 text-black lg:px-8">
-      <BrandPattern light />
-      <SectionHeader eyebrow="People" title="Students and Researchers Building the Future of Intelligent Robotics">
-        The lab mentors undergraduate and graduate students through research projects, publications, prototypes, presentations, and hands-on engineering practice. Students are encouraged to take ownership of meaningful research questions, develop technical independence, collaborate across disciplines, and communicate results through posters, manuscripts, demonstrations, and conference presentations.
-      </SectionHeader>
-      <motion.div variants={staggerContainer} initial="hidden" whileInView="show" viewport={{ once: true }} className="relative mx-auto grid max-w-7xl gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {team.map((person) => (
-          <motion.div
-            key={person.name}
-            variants={fadeUp}
-            whileHover={{ y: -10 }}
-            transition={{ type: "spring", stiffness: 150, damping: 18 }}
-            className="group rounded-xl border-2 border-[#C41230] bg-white p-6 hover:shadow-2xl"
-          >
-            {person.image ? (
-              <motion.img whileHover={{ scale: 1.04 }} src={person.image} alt={`${person.name} profile`} className="mb-5 h-28 w-28 rounded-full border-4 border-[#C41230] object-cover shadow-lg" />
-            ) : (
-              <motion.div whileHover={{ scale: 1.04 }} className="mb-5 grid h-28 w-28 place-items-center rounded-full bg-[#EDECE2] text-3xl font-black text-[#C41230] shadow-lg">
-                {person.name.split(" ").map((x) => x[0]).join("").slice(0, 2)}
-              </motion.div>
-            )}
-            <h3 className="text-2xl font-black uppercase text-[#C41230]">{person.name}</h3>
-            <div className="mt-2 font-black text-black">{person.role}</div>
-            <p className="mt-3 leading-7 text-black/70" style={{ fontFamily: "Georgia, serif" }}>{person.details}</p>
-          </motion.div>
-        ))}
-      </motion.div>
-    </section>
-  );
-}
+function Opportunities() { return <section id="opportunities" className="relative overflow-hidden bg-[#FAF9F7] px-5 py-24 text-black lg:px-8"><Pattern light /><div className="relative mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[0.95fr_1.05fr]"><motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}><Ribbon>Opportunities</Ribbon><h2 className="mt-6 text-4xl font-black uppercase tracking-tight text-[#C41230] md:text-6xl">Join a Lab Where Ideas Become Working Systems.</h2><p className="mt-6 max-w-2xl text-lg leading-8 text-black/75">Motivated undergraduate and graduate students interested in robotics, controls, AI, embedded systems, CAD/CAM, sensors, and rehabilitation engineering are encouraged to connect with the lab. Students can contribute through literature review, mathematical modeling, simulation, mechanical design, electronics, programming, experiments, data analysis, outreach, and manuscript preparation.</p></motion.div><motion.div variants={staggerContainer} initial="hidden" whileInView="show" viewport={{ once: true }} className="grid gap-4 md:grid-cols-2">{["Exoskeleton robot modeling and simulation", "AI and reinforcement learning based control", "Embedded control and real-time implementation", "Digital twin and predictive maintenance", "Mobile robotics and drone autonomy", "K–12 robotics and engineering outreach"].map((item) => <motion.div key={item} variants={fadeUp} whileHover={{ y: -7 }} transition={{ type: "spring", stiffness: 160, damping: 18 }} className="rounded-xl border-2 border-[#C41230] bg-white p-5 shadow-lg"><motion.div animate={{ x: [0, 4, 0] }} transition={{ duration: 1.8, repeat: Infinity }} className="mb-4 grid h-10 w-10 place-items-center rounded-md bg-[#C41230] text-white">→</motion.div><div className="font-black uppercase text-black">{item}</div></motion.div>)}</motion.div></div></section>; }
 
-function Publications() {
-  return (
-    <section id="publications" className="bg-[#C41230] px-5 py-24 text-white lg:px-8">
-      <SectionHeader red eyebrow="Selected Publications" title="Scholarship in Exoskeleton Robotics, Control, and Intelligent Systems">
-        Selected recent journal publications and research outputs from the lab and collaborators. This work reflects the lab’s emphasis on rehabilitation robotics, exoskeleton design, nonlinear and intelligent control, simulation-driven evaluation, and systematic review of emerging technologies in assistive and cyber-physical systems.
-      </SectionHeader>
+function News() { const news = useMemo(() => [["2026", "Lab Website Reconstruction", "The redesigned laboratory website presents a stronger visual identity, clearer research organization, improved student recruitment messaging, and a more professional platform for collaborators and visitors."], ["2025", "AI and Rehabilitation Robotics", "The lab continues to advance AI-assisted exoskeleton control, digital twin infrastructure, simulation-based controller evaluation, and adaptive rehabilitation concepts for future translational studies."], ["2025", "Student Research", "Undergraduate and graduate students are contributing to robot prototypes, simulations, embedded systems, literature reviews, posters, manuscripts, and outreach demonstrations."]], []); return <section className="relative overflow-hidden bg-[#C41230] px-5 py-24 text-white lg:px-8"><Pattern /><div className="mx-auto mb-12 max-w-3xl text-center"><motion.div initial={{ opacity: 0, x: -12 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="inline-block rounded-md bg-white px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-[#C41230]">News</motion.div><motion.h2 initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.05 }} className="mt-5 text-3xl font-black tracking-tight text-white md:text-5xl">Recent Updates from the Lab</motion.h2></div><motion.div variants={staggerContainer} initial="hidden" whileInView="show" viewport={{ once: true }} className="relative mx-auto grid max-w-6xl gap-5 md:grid-cols-3">{news.map(([year, title, text]) => <motion.div variants={fadeUp} whileHover={{ y: -8 }} key={title} className="rounded-xl border-2 border-white bg-white p-7 text-black shadow-2xl"><div className="mb-6 inline-flex rounded-md bg-[#C41230] px-4 py-1 text-sm font-black text-white">{year}</div><h3 className="text-xl font-black uppercase text-[#C41230]">{title}</h3><p className="mt-3 leading-7 text-black/75">{text}</p></motion.div>)}</motion.div></section>; }
 
-      <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-        className="relative mx-auto max-w-6xl overflow-hidden rounded-xl border-2 border-white bg-white p-8 text-black shadow-2xl md:p-10"
-      >
-        <RedCornerFrame className="right-0 top-0 rotate-90" />
-        <div className="mb-8 flex flex-col justify-between gap-5 md:flex-row md:items-end">
-          <div>
-            <AngledRibbon>Recent Publications</AngledRibbon>
-            <h3 className="mt-6 text-3xl font-black uppercase tracking-tight text-[#C41230] md:text-4xl">
-              Recent Publications from the Laboratory
-            </h3>
-            <p className="mt-4 max-w-3xl text-base leading-7 text-black/75" style={{ fontFamily: "Georgia, serif" }}>
-              The following selected publications highlight recent contributions in rehabilitation exoskeleton robotics, intelligent control, biomechanical modeling, and systematic review of emerging technologies.
-            </p>
-          </div>
-          <motion.a
-            whileHover={{ y: -3 }}
-            whileTap={{ scale: 0.97 }}
-            href="https://scholar.google.com/citations?user=rWpbA6wAAAAJ&hl=en&authuser=1"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex shrink-0 items-center justify-center rounded-md border-2 border-[#C41230] bg-white px-6 py-2 font-black text-[#C41230] transition hover:bg-[#C41230] hover:text-white"
-          >
-            View Full Publication List ↗
-          </motion.a>
-        </div>
+function Contact() { return <section id="contact" className="bg-white px-5 py-24 text-black lg:px-8"><div className="mx-auto max-w-7xl"><motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="relative overflow-hidden rounded-xl border-2 border-[#C41230] bg-white p-8 shadow-2xl md:p-10"><Corner className="right-0 top-0 rotate-90" /><Ribbon>Contact</Ribbon><div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr]"><div><h2 className="mt-6 text-4xl font-black uppercase tracking-tight text-[#C41230] md:text-6xl">Contact the Laboratory</h2><p className="mt-6 max-w-2xl text-lg leading-8 text-black/75">The Biomechatronics System Design Laboratory is directed by Sk Hasan, Ph.D., in the Department of Mechanical and Manufacturing Engineering at Miami University. Prospective students, collaborators, clinicians, educators, and industry partners are welcome to contact the lab regarding rehabilitation robotics, intelligent control, digital twins, assistive technology, and hands-on engineering education.</p><div className="mt-8 flex flex-wrap gap-3"><motion.a whileHover={{ y: -3 }} whileTap={{ scale: 0.97 }} href={emailUrl} className="inline-flex items-center justify-center rounded-md bg-[#C41230] px-6 py-2 font-black text-white transition hover:bg-[#AD102A]">Email the Lab</motion.a><motion.a whileHover={{ y: -3 }} whileTap={{ scale: 0.97 }} href={scholarUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center rounded-md border-2 border-[#C41230] bg-white px-6 py-2 font-black text-[#C41230] transition hover:bg-[#C41230] hover:text-white">Google Scholar ↗</motion.a></div></div><motion.div variants={staggerContainer} initial="hidden" whileInView="show" viewport={{ once: true }} className="rounded-xl bg-[#FAF9F7] p-6"><h3 className="mb-5 text-2xl font-black uppercase text-[#C41230]">Contact Information</h3><div className="grid gap-4">{[["PI", "Sk Hasan, Ph.D."], ["EMAIL", "hasansk@miamioh.edu"], ["DEPT", "Department of Mechanical & Manufacturing Engineering"], ["OFFICE", "56 Garland Hall"], ["ADDR", "650 E. High St, Oxford, OH 45056"], ["TEL", "513-529-0805"], ["FAX", "513-529-0717"]].map(([label, value]) => <motion.div variants={fadeUp} whileHover={{ x: 6 }} key={label} className="flex items-center gap-4 rounded-xl border-2 border-[#C41230] bg-white p-4 shadow-sm"><span className="min-w-20 rounded-md bg-[#C41230] px-3 py-2 text-center text-xs font-black text-white">{label}</span>{label === "EMAIL" ? <a href={emailUrl} className="font-black text-black hover:text-[#C41230]">{value}</a> : <span className="font-black text-black">{value}</span>}</motion.div>)}</div></motion.div></div></motion.div></div></section>; }
 
-        <motion.div variants={staggerContainer} initial="hidden" whileInView="show" viewport={{ once: true }} className="grid gap-4">
-          {publications.map((pub, idx) => (
-            <motion.div
-              key={pub}
-              variants={fadeUp}
-              whileHover={{ x: 8 }}
-              className="flex gap-5 rounded-lg border-2 border-[#C41230] bg-[#FAF9F7] p-5"
-            >
-              <motion.div whileHover={{ rotate: 8 }} className="grid h-10 w-10 shrink-0 place-items-center rounded-md bg-[#C41230] text-sm font-black text-white">{idx + 1}</motion.div>
-              <div className="text-justify leading-7 text-black/80" style={{ fontFamily: "Georgia, serif" }}>{pub}</div>
-            </motion.div>
-          ))}
-        </motion.div>
-      </motion.div>
-    </section>
-  );
-}
+function Footer() { return <footer className="border-t border-[#EDECE2] bg-[#FAF9F7] px-5 py-8 text-black lg:px-8"><div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 text-center md:flex-row md:text-left"><motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}><div className="font-black uppercase text-[#C41230]">Biomechatronics System Design Laboratory</div><div className="mt-1 text-sm text-black/65">© 2026 Miami University. Oxford, Ohio.</div></motion.div><motion.div variants={staggerContainer} initial="hidden" whileInView="show" viewport={{ once: true }} className="flex gap-3">{[["WEB", facultyUrl], ["CV", null], ["MAIL", emailUrl]].map(([Icon, href]) => href ? <motion.a variants={fadeUp} whileHover={{ y: -5 }} whileTap={{ scale: 0.95 }} key={Icon} href={href} target={href.startsWith("http") ? "_blank" : undefined} rel={href.startsWith("http") ? "noopener noreferrer" : undefined} className="grid h-10 min-w-10 place-items-center rounded-md border-2 border-[#C41230] bg-white px-3 text-xs font-black text-[#C41230]">{Icon}</motion.a> : <motion.div variants={fadeUp} whileHover={{ y: -5 }} whileTap={{ scale: 0.95 }} key={Icon} className="grid h-10 min-w-10 place-items-center rounded-md border-2 border-[#C41230] bg-white px-3 text-xs font-black text-[#C41230]">{Icon}</motion.div>)}</motion.div></div></footer>; }
 
-function Teaching() {
-  return (
-    <section id="teaching" className="relative overflow-hidden bg-white px-5 py-24 text-black lg:px-8">
-      <SectionHeader eyebrow="Teaching and Outreach" title="Connecting Research, Classroom Learning, and Community Impact">
-        The lab integrates robotics, control, modeling, instrumentation, and AI into courses, outreach activities, and student-led research experiences. Teaching and mentoring are designed to help students move from foundational concepts to practical engineering judgment through simulation, experimentation, design iteration, and professional communication.
-      </SectionHeader>
-      <div className="relative mx-auto grid max-w-7xl gap-8 lg:grid-cols-2">
-        <motion.div initial={{ opacity: 0, x: -28 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} whileHover={{ y: -6 }} className="rounded-xl border-2 border-[#C41230] bg-[#FAF9F7] p-8 shadow-2xl">
-          <AngledRibbon>Courses</AngledRibbon>
-          <h3 className="mt-8 text-3xl font-black uppercase text-[#C41230]">Courses and Mentoring</h3>
-          <motion.div variants={staggerContainer} initial="hidden" whileInView="show" viewport={{ once: true }} className="mt-8 space-y-4">
-            {teaching.map((item) => (
-              <motion.div variants={fadeUp} whileHover={{ x: 7 }} key={item.title} className="rounded-md border-l-4 border-[#C41230] bg-white p-4">
-                <div className="font-black text-black">{item.title}</div>
-                <p className="mt-2 text-sm leading-6 text-black/70" style={{ fontFamily: "Georgia, serif" }}>{item.description}</p>
-              </motion.div>
-            ))}
-          </motion.div>
-        </motion.div>
-        <motion.div variants={staggerContainer} initial="hidden" whileInView="show" viewport={{ once: true }} className="grid gap-5">
-          {[
-            ["01", "Research Training", "Students learn scientific problem formulation, literature review, simulation, experiments, technical writing, and presentation."],
-            ["02", "Inclusive Outreach", "K–12 and undergraduate activities introduce robotics, Arduino systems, sensors, automation, and assistive technology."],
-            ["03", "Hands-on Engineering", "Projects emphasize complete system thinking: design, build, control, test, improve, document, and communicate."],
-          ].map(([num, title, text]) => (
-            <motion.div variants={fadeUp} whileHover={{ x: -6 }} key={title} className="rounded-xl border-2 border-[#C41230] bg-white p-7 shadow-xl">
-              <div className="mb-5 text-4xl font-black text-[#C41230]" style={{ fontFamily: "Georgia, serif" }}>{num}</div>
-              <h3 className="text-2xl font-black uppercase text-black">{title}</h3>
-              <p className="mt-3 leading-7 text-black/75" style={{ fontFamily: "Georgia, serif" }}>{text}</p>
-            </motion.div>
-          ))}
-        </motion.div>
-      </div>
-    </section>
-  );
-}
-
-function Opportunities() {
-  return (
-    <section id="opportunities" className="relative overflow-hidden bg-[#FAF9F7] px-5 py-24 text-black lg:px-8">
-      <BrandPattern light />
-      <div className="relative mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[0.95fr_1.05fr]">
-        <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <AngledRibbon>Opportunities</AngledRibbon>
-          <h2 className="mt-6 text-4xl font-black uppercase tracking-tight text-[#C41230] md:text-6xl">Join a Lab Where Ideas Become Working Systems.</h2>
-          <p className="mt-6 max-w-2xl text-lg leading-8 text-black/75" style={{ fontFamily: "Georgia, serif" }}>
-            Motivated undergraduate and graduate students interested in robotics, controls, AI, embedded systems, CAD/CAM, sensors, and rehabilitation engineering are encouraged to connect with the lab. Students can contribute through literature review, mathematical modeling, simulation, mechanical design, electronics, programming, experiments, data analysis, outreach, and manuscript preparation.
-          </p>
-        </motion.div>
-        <motion.div variants={staggerContainer} initial="hidden" whileInView="show" viewport={{ once: true }} className="grid gap-4 md:grid-cols-2">
-          {[
-            "Exoskeleton robot modeling and simulation",
-            "AI and reinforcement learning based control",
-            "Embedded control and real-time implementation",
-            "Digital twin and predictive maintenance",
-            "Mobile robotics and drone autonomy",
-            "K–12 robotics and engineering outreach",
-          ].map((item) => (
-            <motion.div
-              key={item}
-              variants={fadeUp}
-              whileHover={{ y: -7 }}
-              transition={{ type: "spring", stiffness: 160, damping: 18 }}
-              className="rounded-xl border-2 border-[#C41230] bg-white p-5 shadow-lg"
-            >
-              <motion.div animate={{ x: [0, 4, 0] }} transition={{ duration: 1.8, repeat: Infinity }} className="mb-4 grid h-10 w-10 place-items-center rounded-md bg-[#C41230] text-white">→</motion.div>
-              <div className="font-black uppercase text-black">{item}</div>
-            </motion.div>
-          ))}
-        </motion.div>
-      </div>
-    </section>
-  );
-}
-
-function News() {
-  const news = useMemo(
-    () => [
-      ["2026", "Lab Website Reconstruction", "The redesigned laboratory website presents a stronger visual identity, clearer research organization, improved student recruitment messaging, and a more professional platform for collaborators and visitors."],
-      ["2025", "AI and Rehabilitation Robotics", "The lab continues to advance AI-assisted exoskeleton control, digital twin infrastructure, simulation-based controller evaluation, and adaptive rehabilitation concepts for future translational studies."],
-      ["2025", "Student Research", "Undergraduate and graduate students are contributing to robot prototypes, simulations, embedded systems, literature reviews, posters, manuscripts, and outreach demonstrations."],
-    ],
-    []
-  );
-  return (
-    <section className="relative overflow-hidden bg-[#C41230] px-5 py-24 text-white lg:px-8">
-      <BrandPattern />
-      <div className="mx-auto mb-12 max-w-3xl text-center">
-        <motion.div
-          initial={{ opacity: 0, x: -12 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="inline-block rounded-md bg-white px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-[#C41230]"
-        >
-          News
-        </motion.div>
-        <motion.h2
-          initial={{ opacity: 0, y: 18 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.05 }}
-          className="mt-5 text-3xl font-black tracking-tight text-white md:text-5xl"
-          style={{ fontFamily: "Proxima Nova, Arial, sans-serif" }}
-        >
-          Recent Updates from the Lab
-        </motion.h2>
-      </div>
-      <motion.div variants={staggerContainer} initial="hidden" whileInView="show" viewport={{ once: true }} className="relative mx-auto grid max-w-6xl gap-5 md:grid-cols-3">
-        {news.map(([year, title, text]) => (
-          <motion.div variants={fadeUp} whileHover={{ y: -8 }} key={title} className="rounded-xl border-2 border-white bg-white p-7 text-black shadow-2xl">
-            <div className="mb-6 inline-flex rounded-md bg-[#C41230] px-4 py-1 text-sm font-black text-white">{year}</div>
-            <h3 className="text-xl font-black uppercase text-[#C41230]">{title}</h3>
-            <p className="mt-3 leading-7 text-black/75" style={{ fontFamily: "Georgia, serif" }}>{text}</p>
-          </motion.div>
-        ))}
-      </motion.div>
-    </section>
-  );
-}
-
-function Contact() {
-  return (
-    <section id="contact" className="bg-white px-5 py-24 text-black lg:px-8">
-      <div className="mx-auto max-w-7xl">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="relative overflow-hidden rounded-xl border-2 border-[#C41230] bg-white p-8 shadow-2xl md:p-10"
-        >
-          <RedCornerFrame className="right-0 top-0 rotate-90" />
-          <AngledRibbon>Contact</AngledRibbon>
-
-          <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr]">
-            <div>
-              <h2 className="mt-6 text-4xl font-black uppercase tracking-tight text-[#C41230] md:text-6xl">
-                Contact the Laboratory
-              </h2>
-              <p className="mt-6 max-w-2xl text-lg leading-8 text-black/75" style={{ fontFamily: "Georgia, serif" }}>
-                The Biomechatronics System Design Laboratory is directed by Sk Hasan, Ph.D., in the Department of Mechanical and Manufacturing Engineering at Miami University. Prospective students, collaborators, clinicians, educators, and industry partners are welcome to contact the lab regarding rehabilitation robotics, intelligent control, digital twins, assistive technology, and hands-on engineering education.
-              </p>
-              <div className="mt-8 flex flex-wrap gap-3">
-                <motion.a
-                  whileHover={{ y: -3 }}
-                  whileTap={{ scale: 0.97 }}
-                  href="mailto:hasansk@miamioh.edu"
-                  className="inline-flex items-center justify-center rounded-md bg-[#C41230] px-6 py-2 font-black text-white transition hover:bg-[#AD102A]"
-                >
-                  Email the Lab
-                </motion.a>
-                <motion.a
-                  whileHover={{ y: -3 }}
-                  whileTap={{ scale: 0.97 }}
-                  href="https://scholar.google.com/citations?user=rWpbA6wAAAAJ&hl=en&authuser=1"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center rounded-md border-2 border-[#C41230] bg-white px-6 py-2 font-black text-[#C41230] transition hover:bg-[#C41230] hover:text-white"
-                >
-                  Google Scholar ↗
-                </motion.a>
-              </div>
-            </div>
-
-            <motion.div
-              variants={staggerContainer}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true }}
-              className="rounded-xl bg-[#FAF9F7] p-6"
-            >
-              <h3 className="mb-5 text-2xl font-black uppercase text-[#C41230]">Contact Information</h3>
-              <div className="grid gap-4">
-                {[
-                  ["PI", "Sk Hasan, Ph.D."],
-                  ["EMAIL", "hasansk@miamioh.edu"],
-                  ["DEPT", "Department of Mechanical & Manufacturing Engineering"],
-                  ["OFFICE", "56 Garland Hall"],
-                  ["ADDR", "650 E. High St, Oxford, OH 45056"],
-                  ["TEL", "513-529-0805"],
-                  ["FAX", "513-529-0717"],
-                ].map(([label, value]) => (
-                  <motion.div
-                    variants={fadeUp}
-                    whileHover={{ x: 6 }}
-                    key={label}
-                    className="flex items-center gap-4 rounded-xl border-2 border-[#C41230] bg-white p-4 shadow-sm"
-                  >
-                    <span className="min-w-20 rounded-md bg-[#C41230] px-3 py-2 text-center text-xs font-black text-white">{label}</span>
-                    {label === "EMAIL" ? (
-                      <a href="mailto:hasansk@miamioh.edu" className="font-black text-black hover:text-[#C41230]">{value}</a>
-                    ) : (
-                      <span className="font-black text-black">{value}</span>
-                    )}
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-          </div>
-        </motion.div>
-      </div>
-    </section>
-  );
-}
-
-function Footer() {
-  return (
-    <footer className="border-t border-[#EDECE2] bg-[#FAF9F7] px-5 py-8 text-black lg:px-8">
-      <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 text-center md:flex-row md:text-left">
-        <motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <div className="font-black uppercase text-[#C41230]">Biomechatronics System Design Laboratory</div>
-          <div className="mt-1 text-sm text-black/65">© 2026 Miami University. Website concept prepared for reconstruction.</div>
-        </motion.div>
-        <motion.div variants={staggerContainer} initial="hidden" whileInView="show" viewport={{ once: true }} className="flex gap-3">
-          {[
-            ["WEB", "https://miamioh.edu/profiles/cec/sk-khairul-hasan.html"],
-            ["CV", null],
-            ["MAIL", "mailto:hasansk@miamioh.edu"],
-          ].map(([Icon, href]) =>
-            href ? (
-              <motion.a
-                variants={fadeUp}
-                whileHover={{ y: -5 }}
-                whileTap={{ scale: 0.95 }}
-                key={Icon}
-                href={href}
-                target={href.startsWith("http") ? "_blank" : undefined}
-                rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-                className="grid h-10 min-w-10 place-items-center rounded-md border-2 border-[#C41230] bg-white px-3 text-xs font-black text-[#C41230]"
-              >
-                {Icon}
-              </motion.a>
-            ) : (
-              <motion.div
-                variants={fadeUp}
-                whileHover={{ y: -5 }}
-                whileTap={{ scale: 0.95 }}
-                key={Icon}
-                className="grid h-10 min-w-10 place-items-center rounded-md border-2 border-[#C41230] bg-white px-3 text-xs font-black text-[#C41230]"
-              >
-                {Icon}
-              </motion.div>
-            )
-          )}
-        </motion.div>
-      </div>
-    </footer>
-  );
-}
-
-export default function App() {
-  return (
-    <main className="min-h-screen scroll-smooth bg-white font-sans text-black [&_p]:text-justify" style={{ fontFamily: "Proxima Nova, Arial, sans-serif" }}>
-      <Header />
-      <Hero />
-      <Research />
-      <Projects />
-      <Facilities />
-      <Team />
-      <Publications />
-      <Teaching />
-      <Opportunities />
-      <News />
-      <Contact />
-      <Footer />
-    </main>
-  );
-}
+export default function App() { return <main className="min-h-screen scroll-smooth bg-white font-sans text-black [&_p]:text-justify"><Header /><Hero /><Research /><Projects /><Facilities /><Team /><Publications /><Teaching /><Opportunities /><News /><Contact /><Footer /></main>; }
