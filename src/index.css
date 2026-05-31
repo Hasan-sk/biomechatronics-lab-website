@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html { scroll-behavior: smooth; }
+body { margin: 0; font-family: Arial, Helvetica, sans-serif; background: #ffffff; color: #000000; }
+p { font-family: Georgia, serif; text-align: justify; }
+button { font-family: inherit; }
