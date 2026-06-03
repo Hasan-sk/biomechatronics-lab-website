@@ -25,12 +25,15 @@ function animateHeroTitle() {
     .join(' ');
 }
 
-function cleanPublicationButtonText() {
+function cleanExternalButtonText() {
   const elements = Array.from(document.querySelectorAll('a, button'));
   elements.forEach((element) => {
     const text = element.textContent?.trim();
     if (text === 'View Full Publication List ↗') {
       element.textContent = 'View Full Publication List';
+    }
+    if (text === 'Google Scholar ↗') {
+      element.textContent = 'Google Scholar';
     }
   });
 }
@@ -62,7 +65,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 
 function applyEnhancements() {
   animateHeroTitle();
-  cleanPublicationButtonText();
+  cleanExternalButtonText();
 }
 
 setTimeout(applyEnhancements, 0);
