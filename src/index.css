@@ -6,3 +6,63 @@ html { scroll-behavior: smooth; }
 body { margin: 0; font-family: Arial, Helvetica, sans-serif; background: #ffffff; color: #000000; }
 p { font-family: Georgia, serif; text-align: justify; }
 button { font-family: inherit; }
+
+.hero-title-animated {
+  position: relative;
+  display: inline-block;
+  overflow: visible;
+  text-shadow: 0 8px 28px rgba(0, 0, 0, 0.12);
+}
+
+.hero-title-animated::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.16em;
+  height: 0.08em;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,0.96), rgba(255,255,255,0));
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: heroUnderline 1.35s ease 0.9s forwards, heroUnderlinePulse 4.5s ease-in-out 2.4s infinite;
+}
+
+.hero-title-word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(0.55em) rotateX(18deg);
+  animation: heroWordRise 0.72s cubic-bezier(0.2, 0.8, 0.2, 1) forwards, heroWordFloat 5.6s ease-in-out infinite;
+  animation-delay: calc(var(--word-index) * 0.09s), calc(1.6s + var(--word-index) * 0.09s);
+  will-change: transform, opacity;
+}
+
+@keyframes heroWordRise {
+  0% { opacity: 0; transform: translateY(0.55em) rotateX(18deg); filter: blur(5px); }
+  100% { opacity: 1; transform: translateY(0) rotateX(0deg); filter: blur(0); }
+}
+
+@keyframes heroWordFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-0.045em); }
+}
+
+@keyframes heroUnderline {
+  from { transform: scaleX(0); opacity: 0; }
+  to { transform: scaleX(1); opacity: 1; }
+}
+
+@keyframes heroUnderlinePulse {
+  0%, 100% { opacity: 0.55; transform: scaleX(0.96); }
+  50% { opacity: 1; transform: scaleX(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-title-word,
+  .hero-title-animated::after {
+    animation: none !important;
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
