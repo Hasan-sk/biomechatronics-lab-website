@@ -25,6 +25,16 @@ function animateHeroTitle() {
     .join(' ');
 }
 
+function cleanPublicationButtonText() {
+  const elements = Array.from(document.querySelectorAll('a, button'));
+  elements.forEach((element) => {
+    const text = element.textContent?.trim();
+    if (text === 'View Full Publication List ↗') {
+      element.textContent = 'View Full Publication List';
+    }
+  });
+}
+
 // Ensure the top-right Contact Us button opens the lab email directly.
 document.addEventListener(
   'click',
@@ -50,9 +60,15 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   </React.StrictMode>
 );
 
-setTimeout(animateHeroTitle, 0);
-setTimeout(animateHeroTitle, 250);
-setTimeout(animateHeroTitle, 800);
+function applyEnhancements() {
+  animateHeroTitle();
+  cleanPublicationButtonText();
+}
 
-const heroTitleObserver = new MutationObserver(animateHeroTitle);
-heroTitleObserver.observe(document.body, { childList: true, subtree: true });
+setTimeout(applyEnhancements, 0);
+setTimeout(applyEnhancements, 250);
+setTimeout(applyEnhancements, 800);
+setTimeout(applyEnhancements, 1500);
+
+const siteObserver = new MutationObserver(applyEnhancements);
+siteObserver.observe(document.body, { childList: true, subtree: true });
