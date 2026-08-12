@@ -6,7 +6,7 @@ const emailUrl = "mailto:hasansk@miamioh.edu";
 const facultyUrl = "https://miamioh.edu/profiles/cec/sk-khairul-hasan.html";
 const greatLakesIssuerUrl = "https://badges.parchment.com/org/umich.badges.parchment.com?targetRoute=%7B%22routerLink%22:%5B%22%2Fpublic%2Fissuers%22,%229hY430RPSiii2dvPqJQtGg%22%5D%7D";
 const greatLakesBadgeUrl = "https://badges.parchment.com/public/assertions/-Kiy6jBLSQSfpsuSrR70Tg?identity__email=hasansk@miamioh.edu";
-const greatLakesBadgeImageUrl = `${greatLakesBadgeUrl}&action=download`;
+const greatLakesBadgeImageUrl = "https://badges.parchment.com/public/assertions/-Kiy6jBLSQSfpsuSrR70Tg/image";
 
 function Button({ children, className = "", ...props }) {
   return <button className={`inline-flex items-center justify-center rounded-md px-4 py-2 font-black transition ${className}`} {...props}>{children}</button>;
