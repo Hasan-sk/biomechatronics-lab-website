@@ -4,6 +4,9 @@ import { AnimatePresence, motion } from "framer-motion";
 const scholarUrl = "https://scholar.google.com/citations?user=rWpbA6wAAAAJ&hl=en&authuser=1";
 const emailUrl = "mailto:hasansk@miamioh.edu";
 const facultyUrl = "https://miamioh.edu/profiles/cec/sk-khairul-hasan.html";
+const greatLakesIssuerUrl = "https://badges.parchment.com/org/umich.badges.parchment.com?targetRoute=%7B%22routerLink%22:%5B%22%2Fpublic%2Fissuers%22,%229hY430RPSiii2dvPqJQtGg%22%5D%7D";
+const greatLakesBadgeUrl = "https://badges.parchment.com/public/assertions/-Kiy6jBLSQSfpsuSrR70Tg?identity__email=hasansk@miamioh.edu";
+const greatLakesBadgeImageUrl = `${greatLakesBadgeUrl}&action=download`;
 
 function Button({ children, className = "", ...props }) {
   return <button className={`inline-flex items-center justify-center rounded-md px-4 py-2 font-black transition ${className}`} {...props}>{children}</button>;
@@ -19,6 +22,7 @@ const navItems = [
   { label: "Team", id: "team" },
   { label: "Publications", id: "publications" },
   { label: "Teaching", id: "teaching" },
+  { label: "Credentials", id: "credentials" },
   { label: "Opportunities", id: "opportunities" },
   { label: "Contact", id: "contact" },
 ];
@@ -109,4 +113,17 @@ function Contact() { return <section id="contact" className="bg-white px-5 py-24
 
 function Footer() { return <footer className="border-t border-[#EDECE2] bg-[#FAF9F7] px-5 py-8 text-black lg:px-8"><div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 text-center md:flex-row md:text-left"><motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}><div className="font-black uppercase text-[#C41230]">Biomechatronics System Design Laboratory</div><div className="mt-1 text-sm text-black/65">© 2026 Miami University. Oxford, Ohio.</div></motion.div><motion.div variants={staggerContainer} initial="hidden" whileInView="show" viewport={{ once: true }} className="flex gap-3">{[["WEB", facultyUrl], ["CV", null], ["MAIL", emailUrl]].map(([Icon, href]) => href ? <motion.a variants={fadeUp} whileHover={{ y: -5 }} whileTap={{ scale: 0.95 }} key={Icon} href={href} target={href.startsWith("http") ? "_blank" : undefined} rel={href.startsWith("http") ? "noopener noreferrer" : undefined} className="grid h-10 min-w-10 place-items-center rounded-md border-2 border-[#C41230] bg-white px-3 text-xs font-black text-[#C41230]">{Icon}</motion.a> : <motion.div variants={fadeUp} whileHover={{ y: -5 }} whileTap={{ scale: 0.95 }} key={Icon} className="grid h-10 min-w-10 place-items-center rounded-md border-2 border-[#C41230] bg-white px-3 text-xs font-black text-[#C41230]">{Icon}</motion.div>)}</motion.div></div></footer>; }
 
-export default function App() { return <main className="min-h-screen scroll-smooth bg-white font-sans text-black [&_p]:text-justify"><Header /><Hero /><Research /><Projects /><Facilities /><Team /><Publications /><Teaching /><Opportunities /><News /><Contact /><Footer /></main>; }
+function Credentials() {
+  const criteria = [
+    "Conducted 15+ customer discovery interviews",
+    "Developed testable hypotheses and questions to (in)validate them",
+    "Developed and refined value propositions reflecting customer jobs, problems, and needs based on interviews",
+    "Identified and sized one or two customer segments based on interviews with appropriate representatives",
+    "Made substantive adjustments—pivots or iterations—based on interviews",
+    "Attended course sessions, submitted high-quality assignments, and participated in office hours",
+  ];
+
+  return <section id="credentials" className="relative overflow-hidden bg-[#C41230] px-5 py-24 text-white lg:px-8"><Pattern /><div className="relative mx-auto max-w-7xl"><SectionHeader red eyebrow="Professional Credential" title="Great Lakes I-Corps Course Completion">This verified badge recognizes completion of an I-Corps course sponsored by the Great Lakes I-Corps Hub.</SectionHeader><motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="grid overflow-hidden rounded-xl border-2 border-white bg-white text-black shadow-2xl lg:grid-cols-[0.72fr_1.28fr]"><div className="bg-[#FAF9F7] p-7 md:p-9"><div className="flex items-start justify-between gap-4"><a href={greatLakesBadgeUrl} target="_blank" rel="noopener noreferrer" aria-label="View the verified Great Lakes I-Corps badge"><img src={greatLakesBadgeImageUrl} alt="Great Lakes I-Corps Course Completion badge awarded to Sk Hasan" className="h-28 w-28 object-contain drop-shadow-md" /></a><span className="rounded-full bg-emerald-100 px-4 py-2 text-xs font-black uppercase tracking-[0.15em] text-emerald-800">✓ Verified</span></div><h3 className="mt-8 text-2xl font-black uppercase text-[#C41230]">Badge Details</h3><dl className="mt-6 grid gap-5 text-sm"><div><dt className="font-black uppercase tracking-wider text-black/55">Awarded to</dt><dd className="mt-1 text-lg font-black">Sk Hasan</dd><dd><a href={emailUrl} className="font-bold text-[#C41230] hover:underline">hasansk@miamioh.edu</a></dd></div><div><dt className="font-black uppercase tracking-wider text-black/55">Issued on</dt><dd className="mt-1 font-bold">July 30, 2026 at 1:00 AM</dd></div><div><dt className="font-black uppercase tracking-wider text-black/55">Last verified</dt><dd className="mt-1 font-bold">August 11, 2026</dd><dd className="text-black/65">Parchment Digital Badges</dd></div><div><dt className="font-black uppercase tracking-wider text-black/55">Offered by</dt><dd className="mt-1"><a href={greatLakesIssuerUrl} target="_blank" rel="noopener noreferrer" className="font-black text-[#C41230] hover:underline">NSF I-Corps Hub: Great Lakes Region ↗</a></dd><dd className="mt-1 font-bold text-emerald-700">Verified issuer</dd></div></dl><motion.a whileHover={{ y: -3 }} whileTap={{ scale: 0.97 }} href={greatLakesBadgeUrl} target="_blank" rel="noopener noreferrer" className="mt-8 inline-flex items-center justify-center rounded-md bg-[#C41230] px-6 py-3 font-black text-white transition hover:bg-[#AD102A]">Re-verify Badge ↗</motion.a></div><div className="p-7 md:p-9"><Ribbon>Earning Criteria</Ribbon><h3 className="mt-7 text-3xl font-black uppercase text-[#C41230]">Customer Discovery in Practice</h3><p className="mt-4 leading-7 text-black/70">Recipients must complete the course requirements below to earn this badge.</p><motion.ul variants={staggerContainer} initial="hidden" whileInView="show" viewport={{ once: true }} className="mt-7 grid gap-4">{criteria.map((item) => <motion.li variants={fadeUp} key={item} className="flex gap-4 rounded-lg border-2 border-[#C41230] bg-[#FAF9F7] p-4"><span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-[#C41230] text-sm font-black text-white">✓</span><span className="font-bold leading-7">{item}</span></motion.li>)}</motion.ul></div></motion.div></div></section>;
+}
+
+export default function App() { return <main className="min-h-screen scroll-smooth bg-white font-sans text-black [&_p]:text-justify"><Header /><Hero /><Research /><Projects /><Facilities /><Team /><Publications /><Teaching /><Credentials /><Opportunities /><News /><Contact /><Footer /></main>; }
