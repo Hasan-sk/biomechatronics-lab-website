@@ -64,26 +64,47 @@ button { font-family: inherit; }
   50% { transform: translateY(-0.045em); }
 }
 
+@property --contact-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
 .contact-panel-float {
-  animation: contactPanelFloat 5.5s ease-in-out infinite;
-  will-change: transform, box-shadow;
+  --contact-angle: 0deg;
+  border-color: transparent !important;
+  background:
+    linear-gradient(#ffffff, #ffffff) padding-box,
+    conic-gradient(
+      from var(--contact-angle),
+      #C41230 0deg 34deg,
+      rgba(196, 18, 48, 0.25) 34deg 176deg,
+      #C41230 176deg 202deg,
+      rgba(196, 18, 48, 0.25) 202deg 360deg
+    ) border-box;
+  will-change: box-shadow;
 }
 
-.contact-panel-float:hover {
+.contact-panel-float.contact-panel-orbit-once {
+  animation: contactBorderOrbit 6.5s ease-in-out 1, contactPanelGlow 6.5s ease-in-out 1;
+}
+
+.contact-panel-float.contact-panel-orbit-once:hover {
   animation-play-state: paused;
-  transform: translateY(-4px);
-  box-shadow: 0 28px 60px rgba(196, 18, 48, 0.18), 0 18px 35px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 26px 58px rgba(196, 18, 48, 0.16), 0 16px 34px rgba(0, 0, 0, 0.1);
 }
 
-@keyframes contactPanelFloat {
+@keyframes contactPanelGlow {
   0%, 100% {
-    transform: translateY(0);
-    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.11), 0 0 0 rgba(196, 18, 48, 0);
+    box-shadow: 0 22px 46px rgba(0, 0, 0, 0.1), 0 0 0 rgba(196, 18, 48, 0);
   }
   50% {
-    transform: translateY(-5px);
-    box-shadow: 0 30px 58px rgba(0, 0, 0, 0.13), 0 0 28px rgba(196, 18, 48, 0.1);
+    box-shadow: 0 28px 58px rgba(0, 0, 0, 0.12), 0 0 34px rgba(196, 18, 48, 0.14);
   }
+}
+
+@keyframes contactBorderOrbit {
+  to { --contact-angle: 360deg; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -98,4 +119,5 @@ button { font-family: inherit; }
     animation: none !important;
     transform: none;
   }
+
 }
